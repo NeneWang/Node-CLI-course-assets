@@ -1,8 +1,8 @@
 {
-	"name": "@ahmadawais/dir",
+	"name": "@ahmadawais/direct",
 	"version": "0.0.1",
 	"bin": {
-		"dir": "index.js"
+		"direct": "index.js"
 	},
 	"dependencies": {
 		"execa": "^4.0.2",
