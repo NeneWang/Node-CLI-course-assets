@@ -6,7 +6,7 @@ const { exec } = require('child_process');
 exec(`mkdir -p ${dirName}`);
 
 
-
+// This ran the best for me exec(`git coa ${commitMessage} && git poh ` );
 
 // Execute using execa.
 // const execa = require('execa');
