@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const alert = require('cli-alerts');
-const { Toggle } = require('enquirer');
+const { Toggle, Confirm, prompt, AutoComplete } = require('enquirer');
 
 const init = require('./utils/init');
 const data = require('./utils/data');
@@ -17,14 +17,76 @@ const flags = cli.flags;
 	init(flags.minimal, flags.clear);
 	input.includes('help') && cli.showHelp(0);
 
-	const prompt = new Toggle({
+	const year = new Toggle({
 		message: 'Tell us about your class?',
 		enabled: `2020`,
 		disabled: `2021`,
 	});
 
-	const isClass2020 = await prompt.run();
+	const isClass2020 = await year.run();
 	console.log(`isClass2020`, isClass2020);
+
+	const confirm = await new Toggle({
+		name: "Question",
+		message: "Was that cool?"
+	}).run();
+
+	console.log('Answer: (confirm)', confirm);
+
+
+
+	const question = [
+		{
+			type: 'input',
+			name: 'username',
+			message: 'What is your username?'
+		},
+		{
+			type: 'password',
+			name: 'password',
+			message: 'What is your password?'
+		}
+	];
+
+	let answers = await prompt(question);
+	console.log("Answers ", answers)
+
+	const choices = [
+		'Almond',
+		'Apple',
+		'Banana',
+		'Blackberry',
+		'Blueberry',
+		'Cherry',
+		'Chocolate',
+		'Cinnamon',
+		'Coconut',
+		'Cranberry',
+		'Grape',
+		'Nougat',
+		'Orange',
+		'Pear',
+		'Pineapple',
+		'Raspberry',
+		'Strawberry',
+		'Vanilla',
+		'Watermelon',
+		'Wintergreen'
+	]
+
+	const multiselect = new AutoComplete({
+		name: 'Flavor',
+		message: 'Pick your favorite flavor',
+		limit: 10,
+		initial: 2,
+		choices: choices
+	})
+
+	let multiselectAns = await multiselect.run();
+
+	console.log("Flavor Selected", multiselectAns);
+
+
 
 	// // Print out the info.
 	// flags.ad && alert({ type: 'info', msg: data.ad });
