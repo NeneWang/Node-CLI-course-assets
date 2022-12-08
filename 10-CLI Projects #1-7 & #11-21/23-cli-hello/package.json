@@ -1,5 +1,5 @@
 {
-	"name": "@ahmadawais/hello",
+	"name": "@nenewang/hello",
 	"version": "0.0.1",
 	"bin": {
 		"hello": "index.js"
