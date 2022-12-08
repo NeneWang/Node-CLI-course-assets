@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const alert = require('cli-alerts');
-const { Toggle, Confirm, prompt, AutoComplete } = require('enquirer');
+const { Toggle, Confirm, prompt, AutoComplete, Survey } = require('enquirer');
 
 const init = require('./utils/init');
 const data = require('./utils/data');
@@ -86,7 +86,45 @@ const flags = cli.flags;
 
 	console.log("Flavor Selected", multiselectAns);
 
+	// ________________________ Survey Option
 
+	const surveySample = new Survey({
+		name: 'experience',
+		message: 'Please rate your experience',
+		scale: [
+			{ name: '1', message: 'Strongly Disagree' },
+			{ name: '2', message: 'Disagree' },
+			{ name: '3', message: 'Neutral' },
+			{ name: '4', message: 'Agree' },
+			{ name: '5', message: 'Strongly Agree' }
+		],
+		margin: [0, 0, 2, 1],
+		choices: [
+			{
+				name: 'interface',
+				message: 'The website has a friendly interface.'
+			},
+			{
+				name: 'navigation',
+				message: 'The website is easy to navigate.'
+			},
+			{
+				name: 'images',
+				message: 'The website usually has good images.'
+			},
+			{
+				name: 'upload',
+				message: 'The website makes it easy to upload images.'
+			},
+			{
+				name: 'colors',
+				message: 'The website has a pleasing color palette.'
+			}
+		]
+	});
+
+	const surveyResponse = await surveySample.run();
+	console.log(surveyResponse);
 
 	// // Print out the info.
 	// flags.ad && alert({ type: 'info', msg: data.ad });
