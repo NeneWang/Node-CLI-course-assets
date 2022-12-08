@@ -5,12 +5,15 @@ const dirName = process.argv[2];
 const { exec } = require('child_process');
 exec(`mkdir -p ${dirName}`);
 
+
+
+
 // Execute using execa.
-const execa = require('execa');
-(async () => {
-	await execa(`mkdir`, [`-p`, dirName]);
-})();
+// const execa = require('execa');
+// (async () => {
+// 	await execa(`mkdir`, [`-p`, dirName]);
+// })();
 
 // Execute using shelljs.
-const { mkdir } = require('shelljs');
-mkdir(`-p`, dirName);
+// const { mkdir } = require('shelljs');
+// mkdir( dirName);
