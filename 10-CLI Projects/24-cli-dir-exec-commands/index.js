@@ -8,7 +8,7 @@ exec(`mkdir -p ${dirName}`);
 
 // This ran the besasdt for me exec(`git coa ${commitMessage} && git poh ` );
 
-// Execute using execa.
+// Execute ussdaing execa.
 // const execa = require('execa');
 // (async () => {
 // 	await execa(`mkdir`, [`-p`, dirName]);
