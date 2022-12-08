@@ -28,6 +28,27 @@ const input = cli.input;
 const flags = cli.flags;
 const { clear, debug } = flags;
 
+const CONTINUECHARACTERS = [":", ',', ';'];
+const createTodos = async (db) => {
+	const whatTodo = await ask({ message: `Add a todo` });
+	const continueAdding = CONTINUECHARACTERS.includes(whatTodo.slice(-1));
+
+	db.get(`todos`).push({ title: continueAdding ? whatTodo.slice(0, whatTodo.length - 1) : whatTodo }).write();
+	alert({
+		type: `success`,
+		name: `ADDED`,
+		msg: `${whatTodo} ${continueAdding ? ', adding more...' : ''}`
+	});
+
+	if (continueAdding) {
+		return true;
+	} else {
+		return false;
+	}
+
+
+}
+
 (async () => {
 	init({ clear });
 	input.includes(`help`) && cli.showHelp(0);
@@ -55,13 +76,11 @@ const { clear, debug } = flags;
 
 	// COMMAND: todo add.
 	if (input.includes(`add`)) {
-		const whatTodo = await ask({ message: `Add a todo` });
-		db.get(`todos`).push({ title: whatTodo }).write();
-		alert({
-			type: `success`,
-			name: `ADDED`,
-			msg: `successefully!`
-		});
+		let continueCreating = true;
+		while (continueCreating) {
+			continueCreating = await createTodos(db);
+			// continueCreating = true;
+		}
 	}
 
 	// COMMAND: todo del.
