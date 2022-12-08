@@ -1,0 +1,14 @@
+{
+  "name": "ncli",
+  "version": "0.0.1",
+  "description": "CLI to create Node.js CLIs",
+  "bin": {
+      "create-node-cli": "index.js",
+      "ncli": "index.js"
+  },
+  "dependencies": {
+    "copy-template-dir": "^1.4.0"
+  }
+
+}
+
