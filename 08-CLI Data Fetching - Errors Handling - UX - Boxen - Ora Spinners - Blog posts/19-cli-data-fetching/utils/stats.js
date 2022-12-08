@@ -3,7 +3,7 @@ const axios = require('axios');
 const handleError = require('cli-handle-error');
 const to = require('await-to-js').default;
 
-const apiURL = `https://api.github.com/users/ahmadawais`;
+const apiURL = `https://api.github.com/users/nenewang`;
 
 module.exports = async () => {
 	// const res = await fetch(apiURL);
@@ -13,8 +13,10 @@ module.exports = async () => {
 	handleError(`API CALL FAILED`, error, true, true);
 
 	const ghFollowers = res.data.followers;
+	const {login, blog, created_at, avatar_url} = res.data;
+	
 
 	console.log(`
-GitHub Followers: ${ghFollowers}
+${login}, Checkout his resume: ${blog} \n Followers: ${ghFollowers}
 `);
 };
