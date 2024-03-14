@@ -29,6 +29,8 @@ const flags = cli.flags;
 const { clear, debug } = flags;
 
 const CONTINUECHARACTERS = [":", ',', ';'];
+
+
 const createTodos = async (db) => {
 	const whatTodo = await ask({ message: `Add a todo` });
 	const continueAdding = CONTINUECHARACTERS.includes(whatTodo.slice(-1));
@@ -71,6 +73,16 @@ const createTodos = async (db) => {
 		);
 		console.log(
 			`\n${chalk.hex(`#fad000`).inverse(` TOTAL `)} ${allTodos.length}\n`
+		);
+	}
+
+	if (input.includes('clear')) {
+		// clearDB();
+
+		const allTodos = db.get(`todos`).value();
+		
+		allTodos.map(todoTitle =>
+			db.get(`todos`).remove({ title: todoTitle}).write()
 		);
 	}
 
